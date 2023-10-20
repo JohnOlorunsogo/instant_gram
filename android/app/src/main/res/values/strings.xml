@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vandad Sharing App</string>
+    <string name="facebook_app_id">281282728204069</string>
+    <string name="fb_login_protocol_scheme">fb281282728204069</string>
+    <string name="facebook_client_token">100045bcfbd0d660f7028013abc41bb4</string>
+</resources>
