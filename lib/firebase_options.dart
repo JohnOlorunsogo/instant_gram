@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '907756919405',
     projectId: 'vandad-insta-clone',
     storageBucket: 'vandad-insta-clone.appspot.com',
+    iosClientId: '907756919405-o9rc1a3mrabvo79vt9dv02u38ve85oim.apps.googleusercontent.com',
     iosBundleId: 'com.example.instantGram',
   );
 }
