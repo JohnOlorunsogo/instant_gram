@@ -66,10 +66,13 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     result.log();
 
     final userId = _authenticator.userId;
+    userId?.log();
 
     if (result == AuthResult.success && userId != null) {
       //store userId in firestore
       await saveUserId(userId: userId);
+    } else {
+      return;
     }
 
     state = AuthState(

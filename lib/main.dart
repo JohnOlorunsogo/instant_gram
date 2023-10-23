@@ -8,6 +8,7 @@ import 'package:instant_gram/state/auth/providers/auth_state_providers.dart';
 import 'dart:developer' as developer show log;
 
 import 'package:instant_gram/state/auth/providers/is_logged_in_provider.dart';
+import 'package:instant_gram/state/providers/is_loading_provider.dart';
 import 'package:instant_gram/views/components/loading/loading_screen.dart';
 
 extension Log on Object {
@@ -38,6 +39,15 @@ class MyApp extends StatelessWidget {
       ),
       home: Consumer(
         builder: (context, ref, child) {
+          //Display loading screen globally
+          ref.listen<bool>(isLoadingProvider, (previous, isLoading) {
+            if (isLoading) {
+              LoadingScreen.instance().show(context: context);
+            } else {
+              LoadingScreen.instance().hide();
+            }
+          });
+
           final isLoggedIn = ref.watch(isLoggedInProvider);
           if (isLoggedIn) {
             return const MainView();
@@ -94,8 +104,7 @@ class LogInView extends ConsumerWidget {
           ),
           TextButton(
             onPressed: () async {
-              final result = await Authenticator().loginWithFacebook();
-              result.log();
+              ref.read(authStateProvider.notifier).loginWithFacebook();
             },
             child: const Text("Sign In with Facebook"),
           ),
