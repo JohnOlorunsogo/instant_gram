@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instant_gram/main.dart';
 import 'package:instant_gram/state/auth/backend/authenticator.dart';
@@ -29,26 +26,31 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   Future<void> logOut() async {
     state = state.copyWith(isLoading: true);
     await _authenticator.logOut();
-    print('Logged Out');
+
     state = const AuthState.unknown();
   }
 
   Future<void> loginWithGoogle() async {
-    state = state.copyWith(isLoading: true);
-    final result = await _authenticator.loginWithGoogle();
+    try {
+      state = state.copyWith(isLoading: true);
+      final result = await _authenticator.loginWithGoogle();
+      result.log();
 
-    final userId = _authenticator.userId;
+      final userId = _authenticator.userId;
 
-    if (result == AuthResult.success && userId != null) {
-      //store userId in firestore
-      await saveUserId(userId: userId);
+      if (result == AuthResult.success && userId != null) {
+        //store userId in firestore
+        await saveUserId(userId: userId);
+      }
+
+      state = AuthState(
+        result: result,
+        userId: userId,
+        isLoading: false,
+      );
+    } catch (e) {
+      e.log();
     }
-
-    state = AuthState(
-      result: result,
-      userId: userId,
-      isLoading: false,
-    );
   }
 
   Future<void> saveUserId({required UserId userId}) =>
@@ -61,6 +63,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   Future<void> loginWithFacebook() async {
     state = state.copyWith(isLoading: true);
     final result = await _authenticator.loginWithFacebook();
+    result.log();
 
     final userId = _authenticator.userId;
 

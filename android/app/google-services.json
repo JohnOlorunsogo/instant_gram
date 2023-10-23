@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "907756919405-b7lsqh5bq7peisi48m7hglq7jcotcl4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.instant_gram",
+            "certificate_hash": "43e7c9bab70758f356845ef0c87580ba570fc0c0"
+          }
+        },
+        {
           "client_id": "907756919405-1jsp4d8fjbm63972tpv03iouk5s80927.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -8,6 +8,7 @@ import 'package:instant_gram/state/auth/providers/auth_state_providers.dart';
 import 'dart:developer' as developer show log;
 
 import 'package:instant_gram/state/auth/providers/is_logged_in_provider.dart';
+import 'package:instant_gram/views/components/loading/loading_screen.dart';
 
 extension Log on Object {
   void log() => developer.log(toString());

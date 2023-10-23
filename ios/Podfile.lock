@@ -842,6 +842,7 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - Firebase/Auth
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
@@ -959,6 +960,6 @@ SPEC CHECKSUMS:
   video_player_avfoundation: 8563f13d8fc8b2c29dc2d09e60b660e4e8128837
   video_thumbnail: c4e2a3c539e247d4de13cd545344fd2d26ffafd1
 
-PODFILE CHECKSUM: 9c46fd01abff66081b39f5fa5767b3f1d0b11d76
+PODFILE CHECKSUM: f960dd6520c1f8c9022ecf5bacd73b4b947502e6
 
 COCOAPODS: 1.13.0
