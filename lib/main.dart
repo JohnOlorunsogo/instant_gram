@@ -9,7 +9,12 @@ import 'dart:developer' as developer show log;
 
 import 'package:instant_gram/state/auth/providers/is_logged_in_provider.dart';
 import 'package:instant_gram/state/providers/is_loading_provider.dart';
+import 'package:instant_gram/views/components/animations/empty_contents_with_text_animation_view.dart';
+import 'package:instant_gram/views/components/animations/error_animation_view.dart';
+import 'package:instant_gram/views/components/animations/loading_animation_view.dart';
+import 'package:instant_gram/views/components/animations/small_error_animation_view.dart';
 import 'package:instant_gram/views/components/loading/loading_screen.dart';
+import 'package:instant_gram/views/login/login_view.dart';
 
 extension Log on Object {
   void log() => developer.log(toString());
@@ -34,25 +39,28 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark(
+      theme: ThemeData(
         useMaterial3: true,
       ),
       home: Consumer(
         builder: (context, ref, child) {
           //Display loading screen globally
-          ref.listen<bool>(isLoadingProvider, (previous, isLoading) {
-            if (isLoading) {
-              LoadingScreen.instance().show(context: context);
-            } else {
-              LoadingScreen.instance().hide();
-            }
-          });
+          ref.listen<bool>(
+            isLoadingProvider,
+            (previous, isLoading) {
+              if (isLoading) {
+                LoadingScreen.instance().show(context: context);
+              } else {
+                LoadingScreen.instance().hide();
+              }
+            },
+          );
 
           final isLoggedIn = ref.watch(isLoggedInProvider);
           if (isLoggedIn) {
             return const MainView();
           } else {
-            return const LogInView();
+            return const LoginView();
           }
         },
       ),
@@ -71,43 +79,16 @@ class MainView extends ConsumerWidget {
         title: const Text('Main View'),
         centerTitle: true,
       ),
-      body: TextButton(
-        onPressed: () async {
-          await ref.read(authStateProvider.notifier).logOut();
-        },
-        child: const Text('Log Out'),
-      ),
-    );
-  }
-}
-
-class LogInView extends ConsumerWidget {
-  const LogInView({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Log In")),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextButton(
             onPressed: () async {
-              // final result = await Authenticator().loginWithGoogle();
-
-              ref.read(authStateProvider.notifier).loginWithGoogle();
-
-              // result.log();
+              await ref.read(authStateProvider.notifier).logOut();
             },
-            child: const Text("Sign In with Google"),
+            child: const Text('Log Out'),
           ),
-          TextButton(
-            onPressed: () async {
-              ref.read(authStateProvider.notifier).loginWithFacebook();
-            },
-            child: const Text("Sign In with Facebook"),
-          ),
+          const EmptyContentWithTextAnimationView(text: ''),
         ],
       ),
     );

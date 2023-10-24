@@ -64,6 +64,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(isLoading: true);
     final result = await _authenticator.loginWithFacebook();
     result.log();
+    if (result == AuthResult.aborted) {
+      state = state.copyWith(isLoading: false);
+      return;
+    }
 
     final userId = _authenticator.userId;
     userId?.log();
