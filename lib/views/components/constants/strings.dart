@@ -13,7 +13,7 @@ class Strings {
 
   static const logOut = 'Log Out';
   static const areYouSureYouWantToLogOutOfTheApp =
-      'Are you sure you want to logOut of the app?';
+      'Are you sure you want to logout of the app?';
 
   static const cancel = 'Cancel';
 
