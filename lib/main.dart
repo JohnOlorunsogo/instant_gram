@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instant_gram/firebase_options.dart';
-import 'package:instant_gram/state/auth/backend/authenticator.dart';
+
 import 'package:instant_gram/state/auth/providers/auth_state_providers.dart';
 
 import 'dart:developer' as developer show log;
@@ -10,9 +10,6 @@ import 'dart:developer' as developer show log;
 import 'package:instant_gram/state/auth/providers/is_logged_in_provider.dart';
 import 'package:instant_gram/state/providers/is_loading_provider.dart';
 import 'package:instant_gram/views/components/animations/empty_contents_with_text_animation_view.dart';
-import 'package:instant_gram/views/components/animations/error_animation_view.dart';
-import 'package:instant_gram/views/components/animations/loading_animation_view.dart';
-import 'package:instant_gram/views/components/animations/small_error_animation_view.dart';
 import 'package:instant_gram/views/components/loading/loading_screen.dart';
 import 'package:instant_gram/views/login/login_view.dart';
 
