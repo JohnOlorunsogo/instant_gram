@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:instant_gram/state/image_upload/models/file_type.dart';
 import 'package:instant_gram/state/post_settings/models/post_settings.dart';
-import 'package:instant_gram/state/posts/typedefs/models/post_key.dart';
+import 'package:instant_gram/state/posts/models/post_key.dart';
 
 @immutable
 class Post {
@@ -32,14 +32,14 @@ class Post {
           (fileType) => fileType.name == json[PostKey.fileType],
           orElse: () => FileType.image,
         ),
-        aspectRatio = json[PostKey.aspectRatio],
+        aspectRatio = json[PostKey.aspectRatio].toDouble(),
         thumbnailStorageId = json[PostKey.thumbnailStorageId],
         originalFileStorageId = json[PostKey.originalFileStorageId],
         postSettings = {
           for (final entry in json[PostKey.postSettings].entries)
-            PostSettings.values
-                    .firstWhere((element) => element.storageKey == entry.key):
-                entry.value,
+            PostSettings.values.firstWhere(
+              (element) => element.storageKey == entry.key,
+            ): entry.value,
         };
 
   bool get allowLikes => postSettings[PostSettings.allowLikes] ?? false;

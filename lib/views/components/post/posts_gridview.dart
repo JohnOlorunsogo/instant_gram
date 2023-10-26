@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instant_gram/state/posts/typedefs/models/post.dart';
+import 'package:instant_gram/main.dart';
+import 'package:instant_gram/state/posts/models/post.dart';
 import 'package:instant_gram/views/components/post/post_thumbnail_view.dart';
 
 class PostGridView extends StatelessWidget {
@@ -22,6 +23,7 @@ class PostGridView extends StatelessWidget {
       itemCount: posts.length,
       itemBuilder: (context, index) {
         final post = posts.elementAt(index);
+        post.log;
         return PostThumbnailView(
           post: post,
           onTap: () {

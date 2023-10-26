@@ -5,8 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instant_gram/state/auth/constants/firebase_collection_name.dart';
 import 'package:instant_gram/state/auth/providers/user_id_provider.dart';
 import 'package:instant_gram/state/constants/firebase_field_name.dart';
-import 'package:instant_gram/state/posts/typedefs/models/post.dart';
-import 'package:instant_gram/state/posts/typedefs/models/post_key.dart';
+import 'package:instant_gram/state/posts/models/post.dart';
+import 'package:instant_gram/state/posts/models/post_key.dart';
 
 final userPostProvider = StreamProvider.autoDispose<Iterable<Post>>((ref) {
   final controller = StreamController<Iterable<Post>>();
@@ -18,8 +18,13 @@ final userPostProvider = StreamProvider.autoDispose<Iterable<Post>>((ref) {
   };
 
   final sub = FirebaseFirestore.instance
-      .collection(FirebaseCollectionName.posts)
-      .orderBy(FirebaseFieldName.createdAt, descending: true)
+      .collection(
+        FirebaseCollectionName.posts,
+      )
+      .orderBy(
+        FirebaseFieldName.createdAt,
+        descending: true,
+      )
       .where(
         PostKey.userId,
         isEqualTo: userId,
@@ -30,14 +35,18 @@ final userPostProvider = StreamProvider.autoDispose<Iterable<Post>>((ref) {
       final documents = snapshot.docs;
       final posts = documents
           .where(
-            (doc) => !doc.metadata.hasPendingWrites,
-          )
+        (doc) => !doc.metadata.hasPendingWrites,
+      )
           .map(
-            (doc) => Post(
-              postId: doc.id,
-              json: doc.data(),
-            ),
+        (doc) {
+          return Post(
+            postId: doc.id,
+            json: doc.data(),
           );
+        },
+      );
+
+      // posts.log();
 
       controller.sink.add(posts);
     },

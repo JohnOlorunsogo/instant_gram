@@ -13,13 +13,16 @@ class UserPostView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final posts = ref.watch(userPostProvider);
+
     return RefreshIndicator(
       onRefresh: () {
-        return ref.refresh(userPostProvider.future);
-        // return Future.delayed(const Duration(seconds: 1));
+        return Future.delayed(const Duration(seconds: 2)).then((value) {
+          return ref.refresh(userPostProvider);
+        });
       },
       child: posts.when(
         data: (posts) {
+          // posts.elementAt(0).log();
           if (posts.isEmpty) {
             return const EmptyContentWithTextAnimationView(
               text: Strings.youHaveNoPosts,
