@@ -6,6 +6,7 @@
         "firestore",
         "riverpod",
         "Signup",
-        "typedefs"
+        "typedefs",
+        "unfocus"
     ]
 }

@@ -11,10 +11,12 @@ class CommentPayload extends MapView<String, dynamic> {
     required UserId userId,
     required String comment,
     required PostId postId,
-  }) : super({
-          FirebaseFieldName.userId: userId,
-          FirebaseFieldName.comments: comment,
-          FirebaseFieldName.postId: postId,
-          FirebaseFieldName.createdAt: FieldValue.serverTimestamp(),
-        });
+  }) : super(
+          {
+            FirebaseFieldName.userId: userId,
+            FirebaseFieldName.comments: comment,
+            FirebaseFieldName.postId: postId,
+            FirebaseFieldName.createdAt: FieldValue.serverTimestamp(),
+          },
+        );
 }

@@ -15,15 +15,28 @@ class PostThumbnailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Image.network(
-        post.thumbnailUrl,
-        fit: BoxFit.cover,
-        loadingBuilder: (context, child, loadingProgress) =>
-            loadingProgress == null
-                ? child
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Image.network(
+          post.thumbnailUrl,
+          fit: BoxFit.cover,
+          loadingBuilder: (context, child, loadingProgress) =>
+              loadingProgress == null
+                  ? child
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+        ),
       ),
     );
   }
