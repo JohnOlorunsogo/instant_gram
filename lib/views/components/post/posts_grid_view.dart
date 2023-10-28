@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:instant_gram/main.dart';
 import 'package:instant_gram/state/posts/models/post.dart';
 import 'package:instant_gram/views/components/post/post_thumbnail_view.dart';
 import 'package:instant_gram/views/components/post_detail/post_details_view.dart';
