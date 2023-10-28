@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:instant_gram/main.dart';
 import 'package:instant_gram/state/auth/constants/firebase_collection_name.dart';
 import 'package:instant_gram/state/comments/extensions/comment_sorting_by_request.dart';
 import 'package:instant_gram/state/comments/models/comment.dart';
