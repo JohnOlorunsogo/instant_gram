@@ -21,13 +21,13 @@ class PostThumbnailView extends ConsumerWidget {
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black.withOpacity(0.2),
-          //     blurRadius: 4,
-          //     offset: const Offset(0, 2),
-          //   ),
-          // ],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: Image.network(
           post.thumbnailUrl,

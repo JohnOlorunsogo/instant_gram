@@ -63,6 +63,7 @@ class _CreateNewPostViewState extends ConsumerState<CreateNewPostView> {
           IconButton(
             onPressed: isPostButtonEnabled.value
                 ? () async {
+                    widget.dismissKeyboard();
                     final userId = ref.read(userIdProvider);
 
                     if (userId == null) {
@@ -83,8 +84,6 @@ class _CreateNewPostViewState extends ConsumerState<CreateNewPostView> {
                     if (isUploaded && mounted) {
                       Navigator.of(context).pop();
                     }
-
-                    widget.dismissKeyboard();
                   }
                 : null,
             icon: const Icon(Icons.send),

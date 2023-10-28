@@ -8,7 +8,7 @@ import 'package:instant_gram/views/components/animations/empty_contents_with_tex
 import 'package:instant_gram/views/components/animations/error_animation_view.dart';
 import 'package:instant_gram/views/components/animations/loading_animation_view.dart';
 import 'package:instant_gram/views/components/post/post_sliver_grid_view.dart';
-import 'package:instant_gram/views/components/post/posts_grid_view.dart';
+
 import 'package:instant_gram/views/constants/strings.dart';
 
 class SearchGridView extends ConsumerWidget {

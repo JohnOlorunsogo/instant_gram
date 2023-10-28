@@ -24,7 +24,6 @@ class PostGridView extends StatelessWidget {
       itemCount: posts.length,
       itemBuilder: (context, index) {
         final post = posts.elementAt(index);
-        post.log;
         return PostThumbnailView(
           post: post,
           onTap: () {

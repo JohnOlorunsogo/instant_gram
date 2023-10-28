@@ -7,10 +7,12 @@ import 'package:instant_gram/state/auth/providers/auth_state_providers.dart';
 import 'package:instant_gram/state/image_upload/helpers/image_picker_helper.dart';
 import 'package:instant_gram/state/image_upload/models/file_type.dart';
 import 'package:instant_gram/state/post_settings/providers/post_settings_providers.dart';
+
 import 'package:instant_gram/views/components/dialogs/alert_dialog_model.dart';
 import 'package:instant_gram/views/components/dialogs/logout_dialog.dart';
 import 'package:instant_gram/views/constants/strings.dart';
 import 'package:instant_gram/views/create_new_post/create_new_post_view.dart';
+import 'package:instant_gram/views/tabs/home/home_view.dart';
 import 'package:instant_gram/views/tabs/search/search_view.dart';
 import 'package:instant_gram/views/tabs/user_posts/user_posts_view.dart';
 
@@ -120,11 +122,9 @@ class _MainViewState extends ConsumerState<MainView> {
         ),
         body: const TabBarView(
           children: [
-            UserPostView(),
+            HomeView(),
             SearchView(),
-            Center(
-              child: Text('Profile'),
-            ),
+            UserPostView(),
           ],
         ),
       ),
