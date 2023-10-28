@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:instant_gram/views/components/constants/strings.dart';
 import 'package:instant_gram/views/components/loading/loading_screen_controller.dart';
 
@@ -37,9 +37,9 @@ class LoadingScreen {
       {required BuildContext context, required String text}) {
     final state = Overlay.of(context);
 
-    if (state == null) {
-      return null;
-    }
+    // if (state == null) {
+    //   return null;
+    // }
 
     final textController = StreamController<String>();
 

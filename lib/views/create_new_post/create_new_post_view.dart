@@ -11,6 +11,7 @@ import 'package:instant_gram/state/post_settings/models/post_settings.dart';
 import 'package:instant_gram/state/post_settings/providers/post_settings_providers.dart';
 import 'package:instant_gram/views/components/file_thumbnail_view.dart';
 import 'package:instant_gram/views/constants/strings.dart';
+import 'package:instant_gram/views/extensions/dismiss_keyboard.dart';
 
 class CreateNewPostView extends StatefulHookConsumerWidget {
   final File fileToPost;
@@ -82,6 +83,8 @@ class _CreateNewPostViewState extends ConsumerState<CreateNewPostView> {
                     if (isUploaded && mounted) {
                       Navigator.of(context).pop();
                     }
+
+                    widget.dismissKeyboard();
                   }
                 : null,
             icon: const Icon(Icons.send),

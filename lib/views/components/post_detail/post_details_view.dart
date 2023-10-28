@@ -7,7 +7,7 @@ import 'package:instant_gram/state/posts/providers/can_current_user_delete_post_
 import 'package:instant_gram/state/posts/providers/delete_post_provider.dart';
 import 'package:instant_gram/state/posts/providers/specific_post_with_comment_provider.dart';
 import 'package:instant_gram/views/components/animations/small_error_animation_view.dart';
-import 'package:instant_gram/views/components/comments/campact_comment_column.dart';
+import 'package:instant_gram/views/components/comments/compact_comment_column.dart';
 import 'package:instant_gram/views/components/dialogs/alert_dialog_model.dart';
 import 'package:instant_gram/views/components/dialogs/delete_dialog.dart';
 import 'package:instant_gram/views/components/like_button.dart';
@@ -98,84 +98,93 @@ class _PostDetailsViewState extends ConsumerState<PostDetailsView> {
             )
         ],
       ),
-      body: postWithComment.when(
-        data: (postWithComments) {
-          final postId = postWithComments.post.postId;
+      body: RefreshIndicator(
+        onRefresh: () {
+          return Future.delayed(const Duration(seconds: 2)).then((value) {
+            return ref.refresh(
+              specificPostWithCommentProvider(request),
+            );
+          });
+        },
+        child: postWithComment.when(
+          data: (postWithComments) {
+            final postId = postWithComments.post.postId;
 
-          return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                PostImageOrVideoView(
-                  post: postWithComments.post,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // Like button if post allows liking
-                    if (postWithComments.post.allowLikes)
-                      LikeButton(postId: postId),
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PostImageOrVideoView(
+                    post: postWithComments.post,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      // Like button if post allows liking
+                      if (postWithComments.post.allowLikes)
+                        LikeButton(postId: postId),
 
-                    // Comment button if post allows commenting
-                    if (postWithComments.post.allowComments)
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return PostCommentView(
-                                  postId: postId,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.comment_outlined,
-                        ),
-                      )
-                  ],
-                ),
-
-                // post details
-                PostDisplayNameAndMessageView(
-                  post: postWithComments.post,
-                ),
-
-                PostDateView(
-                  date: postWithComments.post.createdAt,
-                ),
-
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Divider(),
-                ),
-
-                CompactCommentColumn(
-                  comments: postWithComments.comments,
-                ),
-
-                //display like count if post allows likes
-                if (postWithComments.post.allowLikes)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        LikesCountView(postId: postId),
-                      ],
-                    ),
+                      // Comment button if post allows commenting
+                      if (postWithComments.post.allowComments)
+                        IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return PostCommentView(
+                                    postId: postId,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.comment_outlined,
+                          ),
+                        )
+                    ],
                   ),
 
-                const SizedBox(
-                  height: 100,
-                )
-              ],
-            ),
-          );
-        },
-        error: (error, stackTrace) => const SmallErrorAnimationView(),
-        loading: () => const CircularProgressIndicator.adaptive(),
+                  // post details
+                  PostDisplayNameAndMessageView(
+                    post: postWithComments.post,
+                  ),
+
+                  PostDateView(
+                    date: postWithComments.post.createdAt,
+                  ),
+
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Divider(),
+                  ),
+
+                  CompactCommentColumn(
+                    comments: postWithComments.comments,
+                  ),
+
+                  //display like count if post allows likes
+                  if (postWithComments.post.allowLikes)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          LikesCountView(postId: postId),
+                        ],
+                      ),
+                    ),
+
+                  const SizedBox(
+                    height: 100,
+                  )
+                ],
+              ),
+            );
+          },
+          error: (error, stackTrace) => const SmallErrorAnimationView(),
+          loading: () => const CircularProgressIndicator.adaptive(),
+        ),
       ),
     );
   }

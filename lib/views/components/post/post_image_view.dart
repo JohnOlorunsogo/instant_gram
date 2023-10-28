@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instant_gram/state/posts/models/post.dart';
+import 'package:instant_gram/views/components/animations/error_animation_view.dart';
 
 class PostImageView extends StatelessWidget {
   const PostImageView({
@@ -19,6 +20,9 @@ class PostImageView extends StatelessWidget {
           return const Center(
             child: CircularProgressIndicator(),
           );
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return const ErrorAnimationView();
         },
       ),
     );

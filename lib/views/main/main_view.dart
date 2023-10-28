@@ -11,6 +11,7 @@ import 'package:instant_gram/views/components/dialogs/alert_dialog_model.dart';
 import 'package:instant_gram/views/components/dialogs/logout_dialog.dart';
 import 'package:instant_gram/views/constants/strings.dart';
 import 'package:instant_gram/views/create_new_post/create_new_post_view.dart';
+import 'package:instant_gram/views/tabs/search/search_view.dart';
 import 'package:instant_gram/views/tabs/user_posts/user_posts_view.dart';
 
 class MainView extends ConsumerStatefulWidget {
@@ -120,9 +121,7 @@ class _MainViewState extends ConsumerState<MainView> {
         body: const TabBarView(
           children: [
             UserPostView(),
-            Center(
-              child: Text('Search'),
-            ),
+            SearchView(),
             Center(
               child: Text('Profile'),
             ),
